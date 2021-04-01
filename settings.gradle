@@ -1,0 +1,5 @@
+rootProject.name = 'rest-docs-demo'
+include 'spring-auto-rest-docs'
+include 'swagger-library'
+include 'swagger-webjar-ui-starter'
+

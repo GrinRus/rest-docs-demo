@@ -1,0 +1,31 @@
+plugins {
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'groovy'
+}
+
+group 'ru.ryabov.swagger.webjar.ui'
+version '0.1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.3")
+    }
+}
+
+apply from: "${project.projectDir}/libraries.gradle"
+
+dependencies {
+    implementation libpacks.swagger
+    implementation libpacks.spring
+    implementation libpacks.utils
+    implementation 'javax.annotation:javax.annotation-api'
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}

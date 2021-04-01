@@ -1,0 +1,81 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'groovy'
+}
+
+group = 'ru.spring.auto.rest.docs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+javadoc.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+apply from: "${project.projectDir}/libraries.gradle"
+
+configurations {
+    jsondoclet
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'javax.annotation:javax.annotation-api'
+    implementation 'org.projectlombok:lombok'
+    implementation project(':swagger-library')
+
+    annotationProcessor 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation libpacks.testing
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'junit', module: 'junit'
+    }
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.vintage:junit-vintage-engine'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params'
+    testImplementation 'org.awaitility:awaitility:3.1.6'
+
+    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
+    testImplementation "org.springframework.restdocs:spring-restdocs-core:2.0.5.RELEASE"
+    testImplementation "capital.scalable:spring-auto-restdocs-core:2.0.10"
+    if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
+        jsondoclet "capital.scalable:spring-auto-restdocs-json-doclet:2.0.9"
+    } else {
+        jsondoclet "capital.scalable:spring-auto-restdocs-json-doclet-jdk9:2.0.9"
+    }
+}
+
+ext {
+//    snippetsDir = file("${project.projectDir}/src/docs/generated-snippets")
+    snippetsDir = file("${buildDir}/generated-snippets")
+    javadocJsonDir = file("${buildDir}/generated-javadoc-json")
+    templateDir = file("${project.projectDir}/templates/asciidoc-documentation")
+}
+
+task jsonDoclet(type: Javadoc, dependsOn: compileJava) {
+    source = sourceSets.main.allJava
+    classpath = sourceSets.main.compileClasspath
+    destinationDir = javadocJsonDir
+    options.docletpath = configurations.jsondoclet.files as List
+    options.doclet = 'capital.scalable.restdocs.jsondoclet.ExtractDocumentationAsJsonDoclet'
+    options.memberLevel = JavadocMemberLevel.PACKAGE
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'org.springframework.restdocs.outputDir', snippetsDir
+    systemProperty 'org.springframework.restdocs.javadocJsonDir', javadocJsonDir
+
+    dependsOn jsonDoclet
+}

@@ -1,0 +1,9 @@
+# Project exclude paths
+/.gradle/
+/build/
+/spring-auto-rest-docs/build/
+/spring-auto-rest-docs/build/classes/java/main/
+/swagger-library/build/
+/swagger-library/build/classes/java/main/
+/swagger-webjar-ui-starter/build/
+/swagger-webjar-ui-starter/build/classes/java/main/

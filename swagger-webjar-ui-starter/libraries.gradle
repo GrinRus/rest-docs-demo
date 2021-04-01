@@ -1,0 +1,14 @@
+ext {
+    libpacks = [
+            swagger : [
+                    'org.webjars:swagger-ui:3.37.2',
+                    'org.webjars:webjars-locator-core:0.45'
+            ],
+            spring : [
+                    "org.springframework.boot:spring-boot-starter-web"
+            ],
+            utils   : [
+                    'commons-io:commons-io:2.2',
+            ]
+    ]
+}

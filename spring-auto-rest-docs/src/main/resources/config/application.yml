@@ -1,0 +1,10 @@
+spring.application.name: my-api
+
+swagger:
+  ui:
+    indexHandler:
+      enabled: true
+      resourceHandler: "/api/**"
+    apis:
+      - url: http://localhost:8080/specs/some_swagger.yaml
+        name: My api

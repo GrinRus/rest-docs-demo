@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ru.ryabov.swagger.webjar.ui.autoconfiguration.SwaggerConfiguration

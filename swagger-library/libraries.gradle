@@ -1,0 +1,21 @@
+ext {
+    spring_version = "5.2.5.RELEASE"
+    libpacks = [
+            swagger : [
+                    "io.swagger:swagger-annotations:1.5.22",
+                    'com.google.code.findbugs:jsr305:3.0.2',
+                    project(":swagger-webjar-ui-starter")
+            ],
+            spring : [
+                    "org.springframework.boot:spring-boot-starter-web"
+            ],
+            javax : [
+                    "javax.annotation:javax.annotation-api:1.3.2",
+                    "javax.validation:validation-api:2.0.1.Final"
+            ],
+            jackson : [
+                    "com.fasterxml.jackson.core:jackson-annotations:2.10.3",
+                    "org.openapitools:jackson-databind-nullable:0.2.1"
+            ]
+    ]
+}

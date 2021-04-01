@@ -1,0 +1,86 @@
+plugins {
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.openapi.generator' version '4.2.2'
+    id "com.fizzpod.gitignore" version "2.2.0"
+    id 'java-library'
+    id 'groovy'
+}
+
+group 'ru.ryabov.swagger-library'
+version '0.1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.3")
+    }
+}
+
+def projectPackage = 'ru.ryabov.swagger-library'
+def specFile = "${project.projectDir}/specs/some_swagger.yaml"
+def ignoreFile = "${project.projectDir}/.openapi-generator-ignore"
+def artifactId  = 'swagger-library'
+
+openApiValidate {
+    inputSpec = specFile
+}
+
+openApiGenerate {
+    generatorName = 'spring'
+    inputSpec = specFile
+    outputDir = "${project.projectDir}/"
+    id = "${artifactId}"
+    groupId = projectPackage
+    ignoreFileOverride = ignoreFile
+    apiPackage = "${projectPackage}.rest.api"
+    invokerPackage = "${projectPackage}.rest.invoker"
+    modelPackage = "${projectPackage}.rest.model"
+    configOptions = [
+            dateLibrary            : 'java8',
+            hideGenerationTimestamp: 'true',
+            interfaceOnly          : 'true',
+            delegatePattern        : 'false',
+            configPackage          : "${projectPackage}.configuration"
+    ]
+}
+
+task copySpecs(type: Copy) {
+    from("${project.projectDir}/specs")
+    into("${project.projectDir}/src/main/resources/META-INF/specs")
+}
+
+task delete(type: Delete) {
+    delete files("${project.projectDir}/specs/adoc/.openapi-generator")
+    delete files("${project.projectDir}/specs/adoc/.openapi-generator-ignore")
+    delete files("${project.projectDir}/src/main/java")
+    delete files("${project.projectDir}/src/main/resources")
+    delete files("${project.projectDir}/.openapi-generator")
+    delete files("${project.projectDir}/.openapi-generator-ignore")
+    delete files("${project.projectDir}/pom.xml")
+    delete files("${project.projectDir}/README.md")
+}
+
+task codegen(dependsOn: ['openApiGenerate', 'copySpecs'])
+
+build.dependsOn(codegen)
+build.mustRunAfter(codegen)
+
+gitignore {
+    ignore '*/.openapi-generator-ignore'
+    ignore '*/.openapi-generator/VERSION'
+    ignore 'scr/main/java/'
+    ignore 'scr/main/resources/'
+}
+
+apply from: "${project.projectDir}/libraries.gradle"
+
+dependencies {
+    implementation libpacks.swagger
+    implementation libpacks.spring
+    implementation libpacks.javax
+    implementation libpacks.jackson
+}
