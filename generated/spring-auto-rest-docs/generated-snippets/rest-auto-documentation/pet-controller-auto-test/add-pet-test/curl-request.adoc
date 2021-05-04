@@ -1,0 +1,7 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/pet' -i -X POST \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{"id":2,"category":{"id":2,"name":"Cat"},"name":"Pussy","photoUrls":[],"tags":null,"status":"available"}'
+----

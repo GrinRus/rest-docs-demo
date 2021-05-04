@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "org.asciidoctor.convert" version "2.4.0"
     id 'java'
     id 'groovy'
 }
@@ -78,4 +79,25 @@ test {
     systemProperty 'org.springframework.restdocs.javadocJsonDir', javadocJsonDir
 
     dependsOn jsonDoclet
+}
+
+asciidoctor {
+    sourceDir = file("src/main/asciidoc")
+    outputDir = file("$buildDir/generated-docs")
+    options backend: "html", doctype: "book"
+    attributes "source-highlighter": "highlightjs", "snippets": snippetsDir
+
+    dependsOn test
+}
+
+asciidoctor.doLast {
+    copy {
+        from file("$buildDir/generated-docs/html5")
+        into file("$buildDir/resources/main/static/docs")
+        include "index.html"
+    }
+}
+
+jar {
+    dependsOn asciidoctor
 }

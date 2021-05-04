@@ -49,6 +49,10 @@ paths:
           schema:
             $ref: "#/definitions/Pet"
       responses:
+        "200":
+          description: "Successful input"
+          schema:
+            type: "boolean"
         "405":
           description: "Invalid input"
       security:
@@ -239,6 +243,10 @@ paths:
           type: "integer"
           format: "int64"
       responses:
+        "200":
+          description: "Successful input"
+          schema:
+            type: "boolean"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -655,13 +663,19 @@ definitions:
       - "photoUrls"
     properties:
       id:
+        description: "pet id"
         type: "integer"
         format: "int64"
       category:
+        description: "category"
         $ref: "#/definitions/Category"
       name:
+        description: "pet name"
         type: "string"
         example: "doggie"
+        required: true
+        maxLength: 9999
+        minLength: 1
       photoUrls:
         type: "array"
         xml:

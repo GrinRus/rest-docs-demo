@@ -1,0 +1,18 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 164
+
+{
+  "id" : 1,
+  "category" : {
+    "id" : 1,
+    "name" : "Dog"
+  },
+  "name" : "Fluffy",
+  "photoUrls" : [ ],
+  "tags" : null,
+  "status" : "available"
+}
+----

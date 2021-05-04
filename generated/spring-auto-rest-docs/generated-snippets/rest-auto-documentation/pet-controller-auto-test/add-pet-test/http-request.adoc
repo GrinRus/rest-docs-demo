@@ -1,0 +1,10 @@
+[source,http,options="nowrap"]
+----
+POST /pet HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Content-Length: 104
+Host: localhost:8080
+
+{"id":2,"category":{"id":2,"name":"Cat"},"name":"Pussy","photoUrls":[],"tags":null,"status":"available"}
+----

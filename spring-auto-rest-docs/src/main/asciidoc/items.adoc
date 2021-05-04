@@ -1,0 +1,64 @@
+[[resources-pets]]
+== Pets
+
+[[resources-pet-get]]
+=== Get a Pet
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/auto-method-path.adoc[]
+
+==== Description
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/auto-description.adoc[]
+
+==== Authorization
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/auto-authorization.adoc[]
+
+==== Path parameters
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/auto-path-parameters.adoc[]
+
+==== Request fields
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/auto-request-fields.adoc[]
+
+==== Response fields
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/auto-response-fields.adoc[]
+
+==== Example request/response
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/curl-request.adoc[]
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/http-response.adoc[][[resources-pet-get]]
+
+[[resources-pet-add]]
+=== Add a Pet
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/add-pet-test/auto-method-path.adoc[]
+
+==== Description
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/auto-description.adoc[]
+
+==== Authorization
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/add-pet-test/auto-authorization.adoc[]
+
+==== Path parameters
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/add-pet-test/auto-path-parameters.adoc[]
+
+==== Request fields
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/add-pet-test/auto-request-fields.adoc[]
+
+==== Response fields
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/add-pet-test/auto-response-fields.adoc[]
+
+==== Example request/response
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/add-pet-test/curl-request.adoc[]
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/add-pet-test/http-response.adoc[]
+
+[[auto-section-resources-pets]]
+== Auto sections Pets
+
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/get-pet-test/auto-section.adoc[]
+include::{snippets}/rest-auto-documentation/pet-controller-auto-test/add-pet-test/auto-section.adoc[]

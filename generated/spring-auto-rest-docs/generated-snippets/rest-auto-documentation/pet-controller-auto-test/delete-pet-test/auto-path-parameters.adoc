@@ -1,0 +1,9 @@
+|===
+|Parameter|Type|Optional|Description
+
+|petId
+|Integer
+|false
+|
+
+|===

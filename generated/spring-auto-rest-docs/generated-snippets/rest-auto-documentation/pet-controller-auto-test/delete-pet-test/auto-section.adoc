@@ -1,0 +1,42 @@
+[[resources-rest-auto-documentation-pet-controller-auto-test-delete-pet-test]]
+=== Delete Pet
+
+include::auto-method-path.adoc[]
+
+include::auto-description.adoc[]
+
+==== Authorization
+
+include::auto-authorization.adoc[]
+
+==== Path parameters
+
+include::auto-path-parameters.adoc[]
+
+==== Query parameters
+
+include::auto-request-parameters.adoc[]
+
+==== Request fields
+
+include::auto-modelattribute.adoc[]
+
+==== Response fields
+
+include::auto-response-fields.adoc[]
+
+==== Hypermedia links
+
+include::auto-links.adoc[]
+
+==== Embedded resources
+
+include::auto-embedded.adoc[]
+
+==== Example request
+
+include::curl-request.adoc[]
+
+==== Example response
+
+include::http-response.adoc[]

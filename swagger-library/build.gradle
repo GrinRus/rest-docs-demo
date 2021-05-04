@@ -48,26 +48,44 @@ openApiGenerate {
     ]
 }
 
+task buildAsciidoc(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    generatorName = "asciidoc"
+    inputSpec = specFile
+    outputDir = "${project.projectDir}/specs/adoc"
+//    templateDir = "${project.projectDir}/templates/asciidoc-documentation"
+    ignoreFileOverride = ignoreFile
+    configOptions = [
+            snippetDir: "${project.projectDir}/specs/adoc"
+    ]
+}
+
+task buildHtml2(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    generatorName = "html2"
+    inputSpec = specFile
+    outputDir = "${project.projectDir}/src/main/resources/static"
+    ignoreFileOverride = ignoreFile
+}
+
 task copySpecs(type: Copy) {
     from("${project.projectDir}/specs")
     into("${project.projectDir}/src/main/resources/META-INF/specs")
 }
 
-task delete(type: Delete) {
-    delete files("${project.projectDir}/specs/adoc/.openapi-generator")
-    delete files("${project.projectDir}/specs/adoc/.openapi-generator-ignore")
-    delete files("${project.projectDir}/src/main/java")
-    delete files("${project.projectDir}/src/main/resources")
-    delete files("${project.projectDir}/.openapi-generator")
-    delete files("${project.projectDir}/.openapi-generator-ignore")
-    delete files("${project.projectDir}/pom.xml")
-    delete files("${project.projectDir}/README.md")
-}
+task codegen(dependsOn: ['openApiGenerate', 'buildAsciidoc', 'buildHtml2', 'copySpecs'])
 
-task codegen(dependsOn: ['openApiGenerate', 'copySpecs'])
+compileJava.dependsOn(codegen)
+compileJava.mustRunAfter(codegen)
 
-build.dependsOn(codegen)
-build.mustRunAfter(codegen)
+//gradle.buildFinished {
+//    delete files("${project.projectDir}/specs/adoc/.openapi-generator")
+//    delete files("${project.projectDir}/specs/adoc/.openapi-generator-ignore")
+//    delete files("${project.projectDir}/src/main/java")
+//    delete files("${project.projectDir}/src/main/resources")
+//    delete files("${project.projectDir}/.openapi-generator")
+//    delete files("${project.projectDir}/.openapi-generator-ignore")
+//    delete files("${project.projectDir}/pom.xml")
+//    delete files("${project.projectDir}/README.md")
+//}
 
 gitignore {
     ignore '*/.openapi-generator-ignore'
