@@ -52,7 +52,6 @@ task buildAsciidoc(type: org.openapitools.generator.gradle.plugin.tasks.Generate
     generatorName = "asciidoc"
     inputSpec = specFile
     outputDir = "${project.projectDir}/specs/adoc"
-//    templateDir = "${project.projectDir}/templates/asciidoc-documentation"
     ignoreFileOverride = ignoreFile
     configOptions = [
             snippetDir: "${project.projectDir}/specs/adoc"
